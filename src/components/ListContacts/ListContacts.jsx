@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
-
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact, getContacts } from 'redux/contactsSlice';
 import { getFilter } from 'redux/filterSlice';
 import css from './ListContacts.module.css';
+
+import { fetchContactsDataThunk } from 'redux/contactsSlice';
+
 
 export const ListContacts = () => {
   const dispatch = useDispatch();
@@ -15,13 +18,19 @@ export const ListContacts = () => {
     name.toLowerCase().includes(normalizedFilter)
   );
 
+  useEffect(() => {
+    dispatch(fetchContactsDataThunk());
+  }, [dispatch]);
+
+
+
   return (
     <ul className={css.ulwrap}>
-      {filteredContacts.map(({ name, number, id }) => {
+      {filteredContacts.map(({ name, phone, id }) => {
         return (
           <li key={id} className={css.list}>
             <p>
-              {name} : {number}
+              {name} : {phone}
             </p>
             <button
               className={css.btn}
