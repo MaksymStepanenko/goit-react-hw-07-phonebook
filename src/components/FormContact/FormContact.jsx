@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import css from './FormContact.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact, getContacts } from 'redux/contactsSlice';
+import { getContacts } from 'redux/contactsSlice';
+import { addContactThunk } from 'redux/operation';
 
 export const FormContact = () => {
   const contacts = useSelector(getContacts);
@@ -18,12 +19,18 @@ export const FormContact = () => {
       window.alert(`${contactName} is already in your contacts`);
       return;
     }
+
     dispatch(
-      addContact({
+      addContactThunk({
         name: contactName,
-        number,
+        phone: number,
         id: nanoid(),
       })
+      // addContact({
+      //   name: contactName,
+      //   number,
+      //   id: nanoid(),
+      // })
     );
 
     setcontactName('');

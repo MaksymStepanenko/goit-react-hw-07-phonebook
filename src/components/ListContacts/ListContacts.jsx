@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact, getContacts } from 'redux/contactsSlice';
+import { getContacts } from 'redux/contactsSlice';
 import { getFilter } from 'redux/filterSlice';
 import css from './ListContacts.module.css';
 
-import { fetchContactsDataThunk } from 'redux/contactsSlice';
+import { fetchContactsDataThunk,deleteContactThunk } from 'redux/operation';
 
 
 export const ListContacts = () => {
@@ -22,6 +22,10 @@ export const ListContacts = () => {
     dispatch(fetchContactsDataThunk());
   }, [dispatch]);
 
+  const handleDelete = (id) => {
+    dispatch(deleteContactThunk(id));
+  };
+
 
 
   return (
@@ -35,7 +39,7 @@ export const ListContacts = () => {
             <button
               className={css.btn}
               type="button"
-              onClick={() => dispatch(deleteContact(id))}
+              onClick={() => handleDelete(id)}
             >
               Delete
             </button>
