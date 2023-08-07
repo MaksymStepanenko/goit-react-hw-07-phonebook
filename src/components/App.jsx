@@ -5,11 +5,11 @@ import { ListContacts } from './ListContacts/ListContacts';
 import { Filter } from './Filter/Filter';
 import { Loader } from './Loader/Loader';
 import css from './App.module.css';
-import { getIsLoading, getError } from '../redux/contactsSlice';
+import { selectIsLoading, selectError } from '../redux/contactsSlice';
 
 export const App = () => {
-    const isLoading = useSelector(getIsLoading);
-    const error = useSelector(getError);
+    const isLoading = useSelector(selectIsLoading);
+    const error = useSelector(selectError);
 
   return (
     <div className={css.appwrap}>

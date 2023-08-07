@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/contactsSlice';
-import { getFilter } from 'redux/filterSlice';
+import { selectContacts } from 'redux/contactsSlice';
+import { selectFilter } from 'redux/filterSlice';
 import css from './ListContacts.module.css';
 
 import { fetchContactsDataThunk,deleteContactThunk } from 'redux/operation';
@@ -10,8 +10,8 @@ import { fetchContactsDataThunk,deleteContactThunk } from 'redux/operation';
 
 export const ListContacts = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
-  const filtered = useSelector(getFilter);
+  const contacts = useSelector(selectContacts);
+  const filtered = useSelector(selectFilter);
 
   const normalizedFilter = filtered.toLowerCase();
   const filteredContacts = contacts.filter(({ name }) =>
